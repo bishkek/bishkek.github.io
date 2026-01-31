@@ -66,6 +66,71 @@ a {
     text-decoration: none;
 }
 
+/* Mobile Navigation Toggle */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-black);
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.nav-mobile {
+    display: none;
+    flex-direction: column;
+    padding: var(--space-sm) 0;
+    border-top: 1px solid var(--color-gray-200);
+    margin-top: var(--space-sm);
+}
+
+.nav-mobile a {
+    padding: var(--space-sm);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-gray-600);
+    transition: color var(--transition), background var(--transition);
+}
+
+.nav-mobile a:hover {
+    color: var(--color-black);
+    background: var(--color-gray-100);
+}
+
+.nav-mobile.active {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
+}
+
 /* Navigation */
 .nav {
     position: fixed;
@@ -676,34 +741,466 @@ a {
     color: var(--color-black);
 }
 
-/* Responsive */
+/* ========================================
+   RESPONSIVE — Mobile First Approach
+   ======================================== */
+
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+    :root {
+        --space-xl: 6rem;
+        --space-2xl: 8rem;
+    }
+    
+    .novels-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .about-content {
+        gap: var(--space-lg);
+    }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
+    :root {
+        --space-lg: 3rem;
+        --space-xl: 4rem;
+        --space-2xl: 6rem;
+    }
+    
+    /* Navigation */
+    .nav {
+        padding: var(--space-sm);
+    }
+    
     .nav-links {
         display: none;
     }
     
+    /* Hero */
     .hero {
-        padding: var(--space-lg) var(--space-sm);
+        padding: var(--space-xl) var(--space-sm);
+        min-height: auto;
+        padding-top: calc(var(--space-xl) + 60px);
     }
     
-    .novels-grid {
-        grid-template-columns: 1fr;
+    .hero-title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+    }
+    
+    .hero-description {
+        font-size: 1.125rem;
+    }
+    
+    .hero-meta {
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+    }
+    
+    .hero-scroll {
+        display: none;
+    }
+    
+    /* Sections */
+    .section-header {
+        flex-direction: column;
+        gap: var(--space-xs);
         padding: 0 var(--space-sm);
     }
     
+    .section-number {
+        font-size: 0.625rem;
+    }
+    
+    /* Novels Grid */
+    .novels-grid {
+        grid-template-columns: 1fr;
+        padding: 0 var(--space-sm);
+        gap: var(--space-sm);
+    }
+    
+    .novel-card-inner {
+        padding: var(--space-md);
+        min-height: auto;
+    }
+    
+    .novel-number {
+        font-size: 3rem;
+        margin-bottom: var(--space-sm);
+    }
+    
+    .novel-title {
+        font-size: 1.5rem;
+    }
+    
+    /* Quote */
+    .quote-section {
+        padding: var(--space-xl) var(--space-sm);
+    }
+    
+    .quote p {
+        font-size: 1.25rem;
+    }
+    
+    /* About */
     .about-content {
         grid-template-columns: 1fr;
         gap: var(--space-lg);
+        padding: 0 var(--space-sm);
+    }
+    
+    .about-lead {
+        font-size: 1.25rem;
+    }
+    
+    .about-details {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-sm);
+    }
+    
+    .detail-item {
+        padding-bottom: var(--space-sm);
+    }
+    
+    /* Timeline */
+    .timeline-items {
+        padding: 0 var(--space-sm);
     }
     
     .timeline-item {
-        grid-template-columns: 80px 1fr;
+        grid-template-columns: 70px 1fr;
+        gap: var(--space-sm);
+    }
+    
+    .timeline-year {
+        font-size: 1.25rem;
+    }
+    
+    /* Footer */
+    .footer {
+        padding: var(--space-lg) var(--space-sm) var(--space-sm);
     }
     
     .footer-content {
         flex-direction: column;
         gap: var(--space-md);
+        margin-bottom: var(--space-lg);
     }
+    
+    /* Reader Pages */
+    .reader-header {
+        padding: calc(var(--space-xl) + 40px) var(--space-sm) var(--space-lg);
+    }
+    
+    .reader-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+    
+    .reader-subtitle {
+        font-size: 1rem;
+    }
+    
+    /* TOC */
+    .toc {
+        padding: var(--space-md) var(--space-sm);
+    }
+    
+    .toc-container {
+        padding: 0;
+    }
+    
+    .toc-link {
+        padding: var(--space-sm) 0;
+    }
+    
+    .toc-link .chapter-num {
+        display: inline-block;
+        min-width: 2rem;
+    }
+    
+    /* Chapter */
+    .chapter {
+        padding: var(--space-lg) var(--space-sm);
+    }
+    
+    .chapter-title {
+        font-size: 1.5rem;
+    }
+    
+    .chapter-content {
+        font-size: 1.0625rem;
+        line-height: 1.75;
+    }
+    
+    .chapter-nav {
+        padding: var(--space-md) var(--space-sm);
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    :root {
+        --space-md: 1.5rem;
+        --space-lg: 2rem;
+        --space-xl: 3rem;
+    }
+    
+    html {
+        font-size: 15px;
+    }
+    
+    /* Hero */
+    .hero {
+        padding: var(--space-lg) var(--space-sm);
+        padding-top: calc(var(--space-lg) + 60px);
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: var(--space-sm);
+    }
+    
+    .hero-subtitle {
+        margin-bottom: var(--space-sm);
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: var(--space-md);
+    }
+    
+    .hero-meta {
+        font-size: 0.75rem;
+    }
+    
+    .hero-meta .separator {
+        display: none;
+    }
+    
+    .hero-meta span:not(.separator) {
+        background: var(--color-gray-100);
+        padding: 0.25rem 0.5rem;
+        border-radius: 2px;
+    }
+    
+    /* Section titles */
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    /* Novel cards */
+    .novel-card-inner {
+        padding: var(--space-sm);
+    }
+    
+    .novel-number {
+        font-size: 2.5rem;
+    }
+    
+    .novel-title {
+        font-size: 1.25rem;
+    }
+    
+    .novel-style {
+        font-size: 0.75rem;
+    }
+    
+    .novel-description {
+        font-size: 0.9375rem;
+    }
+    
+    .novel-meta {
+        font-size: 0.625rem;
+    }
+    
+    /* About */
+    .about-details {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Timeline */
+    .timeline-item {
+        grid-template-columns: 1fr;
+        gap: var(--space-xs);
+    }
+    
+    .timeline-year {
+        font-size: 1rem;
+        color: var(--color-accent);
+    }
+    
+    .timeline-content h4 {
+        font-size: 0.9375rem;
+    }
+    
+    .timeline-content p {
+        font-size: 0.875rem;
+    }
+    
+    /* Reader */
+    .reader-header {
+        padding-top: calc(var(--space-lg) + 50px);
+    }
+    
+    .reader-title {
+        font-size: 1.75rem;
+    }
+    
+    .reader-back {
+        font-size: 0.75rem;
+        margin-bottom: var(--space-md);
+    }
+    
+    /* TOC */
+    .toc-link .chapter-title {
+        font-size: 0.9375rem;
+    }
+    
+    .toc-link svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+    
+    /* Chapter */
+    .chapter-header {
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-md);
+    }
+    
+    .chapter-title {
+        font-size: 1.25rem;
+    }
+    
+    .chapter-content {
+        font-size: 1rem;
+    }
+    
+    .chapter-content p {
+        margin-bottom: 1.25em;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .novel-card-inner {
+        padding: var(--space-sm) 0.75rem;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .novel-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .novel-link:hover {
+        gap: var(--space-sm);
+    }
+    
+    .novel-link:hover svg {
+        transform: none;
+    }
+    
+    .toc-link:hover {
+        padding-left: 0;
+    }
+    
+    .toc-link:hover svg {
+        transform: none;
+    }
+    
+    /* Larger touch targets */
+    .toc-link {
+        padding: var(--space-sm) 0;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .novel-link {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .nav-logo {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* Landscape phones */
+@media (max-width: 812px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: var(--space-md) var(--space-sm);
+        padding-top: calc(var(--space-md) + 60px);
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .novels-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Safe area for notched phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+    .nav {
+        padding-left: max(var(--space-sm), env(safe-area-inset-left));
+        padding-right: max(var(--space-sm), env(safe-area-inset-right));
+    }
+    
+    .footer-bottom {
+        padding-bottom: max(var(--space-sm), env(safe-area-inset-bottom));
+    }
+    
+    .chapter {
+        padding-left: max(var(--space-sm), env(safe-area-inset-left));
+        padding-right: max(var(--space-sm), env(safe-area-inset-right));
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    /* Optional: uncomment to enable automatic dark mode */
+    /*
+    :root {
+        --color-black: #ffffff;
+        --color-white: #0a0a0a;
+        --color-gray-100: #171717;
+        --color-gray-200: #262626;
+        --color-gray-300: #404040;
+        --color-gray-400: #525252;
+        --color-gray-500: #737373;
+        --color-gray-600: #a3a3a3;
+        --color-gray-700: #d4d4d4;
+        --color-gray-800: #e5e5e5;
+        --color-gray-900: #f7f7f7;
+    }
+    
+    .nav {
+        background: rgba(10, 10, 10, 0.95);
+        border-bottom-color: var(--color-gray-800);
+    }
+    */
 }
 
 /* Animations */
@@ -724,6 +1221,18 @@ a {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Reading progress bar */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--color-accent);
+    width: 0%;
+    z-index: 101;
+    transition: width 0.1s linear;
 }
 
 /* Print Styles */
