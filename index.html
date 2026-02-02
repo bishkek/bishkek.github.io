@@ -16,6 +16,25 @@
             <div class="nav-links">
                 <a href="#novels">Романы</a>
                 <a href="#about">О проекте</a>
+                <div class="theme-toggle">
+                    <button class="theme-btn" data-theme="light" title="Светлая тема" aria-label="Светлая тема">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </button>
+                    <button class="theme-btn" data-theme="sepia" title="Сепия" aria-label="Сепия">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </button>
+                    <button class="theme-btn" data-theme="dark" title="Тёмная тема" aria-label="Тёмная тема">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <button class="nav-toggle" aria-label="Меню" aria-expanded="false">
                 <span></span>
@@ -141,35 +160,51 @@
                     <div class="novel-number">V</div>
                     <h3 class="novel-title">Токмокский гамбит</h3>
                     <p class="novel-style">в стиле Бориса Акунина</p>
-                    <p class="novel-description">Надворный советник Вершинин расследует убийство почтмейстера в Токмоке. За шифрованными шахматными партиями скрывается шпионская сеть, а на кону — секретные планы укреплений.</p>
+                    <p class="novel-description">Надворный советник Вершинин расследует убийство почтмейстера в Токмоке. За шифрованными шахматными партиями скрывается шпионская сеть.</p>
                     <div class="novel-meta">
                         <span>8 глав</span>
                         <span>•</span>
                         <span>Сентябрь 1895</span>
                     </div>
                     <a href="novels/tokmok-mystery/index.html" class="novel-link">
+                        <span>Читать</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
             <article class="novel-card" data-novel="karakol">
                 <div class="novel-card-inner">
-                    <div class="novel-number">V</div>
+                    <div class="novel-number">VI</div>
                     <h3 class="novel-title">Каракольский гамбит</h3>
                     <p class="novel-style">в стиле Бориса Акунина</p>
-                    <p class="novel-description">Статский советник Закревский расследует убийство военного топографа, связанное с тайным перевалом через Тянь-Шань и интригами «Большой игры».</p>
+                    <p class="novel-description">Статский советник Закревский расследует убийство военного топографа, связанное с тайным перевалом через Тянь-Шань.</p>
                     <div class="novel-meta">
                         <span>10 глав</span>
                         <span>•</span>
                         <span>Июнь 1895</span>
                     </div>
                     <a href="novels/karakol-mystery/index.html" class="novel-link">
+                        <span>Читать</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
             <article class="novel-card" data-novel="naryn">
                 <div class="novel-card-inner">
-                    <div class="novel-number">V</div>
+                    <div class="novel-number">VII</div>
                     <h3 class="novel-title">Нарынское дело</h3>
                     <p class="novel-style">в стиле Бориса Акунина</p>
-                    <p class="novel-description">Коллежский асессор Званцев расследует убийство китайского купца в высокогорном Нарыне, где сходятся интересы трёх империй в «Большой игре».</p>
+                    <p class="novel-description">Коллежский асессор Званцев расследует убийство китайского купца в высокогорном Нарыне, где сходятся интересы трёх империй.</p>
                     <div class="novel-meta">
                         <span>8 глав</span>
                         <span>•</span>
-                        <span>Октябрь 1895</span>
+                        <span>Апрель 1895</span>
                     </div>
                     <a href="novels/naryn-mystery/index.html" class="novel-link">
                         <span>Читать</span>
@@ -198,8 +233,8 @@
         <div class="about-content">
             <div class="about-text">
                 <p class="about-lead">Пишпек — так назывался Бишкек до 1926 года. Небольшой уездный городок Семиреченской области Российской империи, основанный на месте кокандской крепости.</p>
-                <p>Этот литературный проект — попытка оживить историю края через жанр детектива. Пять романов, пять разных стилей, пять взглядов на эпоху — от классического акунинского детектива до интеллектуальной прозы в духе Умберто Эко.</p>
-                <p>Все тексты созданы с использованием AI и исторических материалов о Пишпеке конца XIX века.</p>
+                <p>Этот литературный проект — попытка оживить историю края через жанр детектива. Семь романов, разные стили, разные города Семиречья — от классического акунинского детектива до интеллектуальной прозы в духе Умберто Эко и семиотических загадок.</p>
+                <p>Все тексты созданы с использованием AI и исторических материалов о Семиреченской области конца XIX века.</p>
             </div>
             <div class="about-details">
                 <div class="detail-item">

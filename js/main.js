@@ -1,7 +1,82 @@
 // Пишпекские хроники — Main JavaScript
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Mobile Navigation Toggle
+    // ========================================
+    // Theme Management
+    // ========================================
+    
+    const initTheme = () => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeButtons(savedTheme);
+    };
+    
+    const setTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        updateThemeButtons(theme);
+    };
+    
+    const updateThemeButtons = (theme) => {
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.theme === theme);
+        });
+    };
+    
+    // Theme toggle buttons
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setTheme(btn.dataset.theme);
+        });
+    });
+    
+    initTheme();
+    
+    // ========================================
+    // Font Size Control
+    // ========================================
+    
+    const initFontSize = () => {
+        const savedSize = localStorage.getItem('fontSize') || 'normal';
+        setFontSize(savedSize);
+    };
+    
+    const setFontSize = (size) => {
+        const content = document.querySelector('.chapter-content');
+        if (!content) return;
+        
+        content.classList.remove('font-small', 'font-large', 'font-xlarge');
+        if (size !== 'normal') {
+            content.classList.add(`font-${size}`);
+        }
+        localStorage.setItem('fontSize', size);
+    };
+    
+    // Font size buttons
+    document.querySelector('.font-decrease')?.addEventListener('click', () => {
+        const sizes = ['small', 'normal', 'large', 'xlarge'];
+        const current = localStorage.getItem('fontSize') || 'normal';
+        const currentIndex = sizes.indexOf(current);
+        if (currentIndex > 0) {
+            setFontSize(sizes[currentIndex - 1]);
+        }
+    });
+    
+    document.querySelector('.font-increase')?.addEventListener('click', () => {
+        const sizes = ['small', 'normal', 'large', 'xlarge'];
+        const current = localStorage.getItem('fontSize') || 'normal';
+        const currentIndex = sizes.indexOf(current);
+        if (currentIndex < sizes.length - 1) {
+            setFontSize(sizes[currentIndex + 1]);
+        }
+    });
+    
+    initFontSize();
+    
+    // ========================================
+    // Mobile Navigation
+    // ========================================
+    
     const navToggle = document.querySelector('.nav-toggle');
     const navMobile = document.querySelector('.nav-mobile');
     
@@ -12,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navMobile.classList.toggle('active');
         });
         
-        // Close menu when clicking a link
         navMobile.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navToggle.setAttribute('aria-expanded', 'false');
@@ -20,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
         
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.nav')) {
                 navToggle.setAttribute('aria-expanded', 'false');
@@ -29,7 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Smooth scroll for anchor links
+    // ========================================
+    // Smooth Scroll
+    // ========================================
+    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -46,45 +122,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Nav background on scroll
+    // ========================================
+    // Nav Effects
+    // ========================================
+    
     const nav = document.querySelector('.nav');
     if (nav) {
-        let lastScroll = 0;
-        
         window.addEventListener('scroll', () => {
-            const currentScroll = window.scrollY;
-            
-            // Add shadow when scrolled
-            if (currentScroll > 50) {
+            if (window.scrollY > 50) {
                 nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
             } else {
                 nav.style.boxShadow = 'none';
             }
-            
-            // Hide/show nav on scroll (optional - uncomment to enable)
-            /*
-            if (currentScroll > lastScroll && currentScroll > 200) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
-            lastScroll = currentScroll;
-            */
         });
     }
 
-    // Reading progress indicator
-    const progressBar = document.querySelector('.reading-progress');
-    if (progressBar) {
-        window.addEventListener('scroll', () => {
+    // ========================================
+    // Reading Progress
+    // ========================================
+    
+    const updateReadingProgress = () => {
+        const progressBar = document.querySelector('.reading-progress');
+        const progressText = document.querySelector('.reading-progress-text');
+        
+        if (progressBar) {
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
             progressBar.style.width = `${Math.min(progress, 100)}%`;
-        });
-    }
+            
+            if (progressText) {
+                const percent = Math.round(progress);
+                progressText.textContent = `Прочитано ${percent}%`;
+            }
+        }
+    };
+    
+    window.addEventListener('scroll', updateReadingProgress);
+    updateReadingProgress();
 
-    // Intersection Observer for fade-in animations
+    // ========================================
+    // Intersection Observer
+    // ========================================
+    
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -100,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Observe elements for animation
     document.querySelectorAll('.timeline-item, .about-content, .quote, .detail-item').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
@@ -108,10 +187,15 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Keyboard navigation for chapters
+    // ========================================
+    // Keyboard Navigation
+    // ========================================
+    
     document.addEventListener('keydown', (e) => {
-        const prevLink = document.querySelector('.chapter-nav .prev');
-        const nextLink = document.querySelector('.chapter-nav .next');
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        
+        const prevLink = document.querySelector('.chapter-nav-link.prev');
+        const nextLink = document.querySelector('.chapter-nav-link.next');
 
         if (e.key === 'ArrowLeft' && prevLink) {
             window.location.href = prevLink.href;
@@ -120,54 +204,85 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Touch swipe navigation for chapters (mobile)
+    // ========================================
+    // Touch Swipe Navigation
+    // ========================================
+    
     let touchStartX = 0;
     let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
     
-    document.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
+    const chapterContent = document.querySelector('.chapter-content');
     
-    document.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, { passive: true });
+    if (chapterContent) {
+        chapterContent.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        chapterContent.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+    }
     
     function handleSwipe() {
         const swipeThreshold = 100;
-        const diff = touchStartX - touchEndX;
+        const diffX = touchStartX - touchEndX;
+        const diffY = Math.abs(touchStartY - touchEndY);
         
-        if (Math.abs(diff) > swipeThreshold) {
-            const prevLink = document.querySelector('.chapter-nav .prev');
-            const nextLink = document.querySelector('.chapter-nav .next');
+        // Only swipe if horizontal movement is greater than vertical
+        if (Math.abs(diffX) > swipeThreshold && diffY < 100) {
+            const prevLink = document.querySelector('.chapter-nav-link.prev');
+            const nextLink = document.querySelector('.chapter-nav-link.next');
             
-            if (diff > 0 && nextLink) {
-                // Swipe left - next chapter
+            if (diffX > 0 && nextLink) {
                 window.location.href = nextLink.href;
-            } else if (diff < 0 && prevLink) {
-                // Swipe right - previous chapter
+            } else if (diffX < 0 && prevLink) {
                 window.location.href = prevLink.href;
             }
         }
     }
 
-    // Prevent zoom on double-tap for iOS
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', (e) => {
-        const now = Date.now();
-        if (now - lastTouchEnd <= 300) {
-            e.preventDefault();
-        }
-        lastTouchEnd = now;
-    }, { passive: false });
+    // ========================================
+    // Scroll to Top
+    // ========================================
+    
+    const scrollToTopBtn = document.querySelector('.scroll-to-top');
+    
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollToTopBtn.style.display = 'flex';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 
-    // Console easter egg
+    // ========================================
+    // Console Easter Egg
+    // ========================================
+    
     console.log('%c📚 Пишпекские хроники', 'font-size: 24px; font-weight: bold;');
     console.log('%cДетективные романы о Бишкеке XIX века', 'font-size: 14px; color: #666;');
     console.log('%c→ bishkek.github.io', 'font-size: 12px; color: #e63946;');
+    console.log('%c⌨️ Навигация: ← → для переключения глав', 'font-size: 11px; color: #999;');
 });
 
-// Utility function to format reading time
+// ========================================
+// Utility Functions
+// ========================================
+
 function calculateReadingTime(text) {
     const wordsPerMinute = 200;
     const words = text.trim().split(/\s+/).length;
@@ -175,7 +290,6 @@ function calculateReadingTime(text) {
     return minutes;
 }
 
-// Export for potential module use
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { calculateReadingTime };
 }
