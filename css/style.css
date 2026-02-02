@@ -305,11 +305,6 @@ a {
 }
 
 /* Navigation */
-        display: flex;
-    }
-}
-
-/* Navigation */
 .nav {
     position: fixed;
     top: 0;

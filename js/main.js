@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const current = localStorage.getItem('fontSize') || 'normal';
         const currentIndex = sizes.indexOf(current);
         if (currentIndex < sizes.length - 1) {
+            setFontSize(sizes[currentIndex + 1]);
         }
     });
     
@@ -149,10 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     initFontFamily();
-        }
-    });
-    
-    initFontSize();
     
     // ========================================
     // Mobile Navigation
