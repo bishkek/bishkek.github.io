@@ -67,7 +67,88 @@ document.addEventListener('DOMContentLoaded', () => {
         const current = localStorage.getItem('fontSize') || 'normal';
         const currentIndex = sizes.indexOf(current);
         if (currentIndex < sizes.length - 1) {
-            setFontSize(sizes[currentIndex + 1]);
+        }
+    });
+    
+    initFontSize();
+    
+    // ========================================
+    // Font Family Selection
+    // ========================================
+    
+    const fonts = [
+        { id: 'cormorant', name: 'Cormorant Garamond', sample: 'Классический элегантный' },
+        { id: 'ptserif', name: 'PT Serif', sample: 'Русский академический' },
+        { id: 'merriweather', name: 'Merriweather', sample: 'Удобный для экрана' },
+        { id: 'crimson', name: 'Crimson Pro', sample: 'Профессиональный' },
+        { id: 'literata', name: 'Literata', sample: 'Для долгого чтения' },
+        { id: 'source', name: 'Source Serif 4', sample: 'Современный Adobe' },
+        { id: 'plex', name: 'IBM Plex Serif', sample: 'Корпоративный стиль' },
+        { id: 'spectral', name: 'Spectral', sample: 'Оптимизирован для веба' },
+        { id: 'lora', name: 'Lora', sample: 'Изящный и читаемый' },
+        { id: 'ptsans', name: 'PT Sans', sample: 'Гротеск без засечек' }
+    ];
+    
+    const initFontFamily = () => {
+        const savedFont = localStorage.getItem('fontFamily') || 'cormorant';
+        setFontFamily(savedFont);
+    };
+    
+    const setFontFamily = (fontId) => {
+        const content = document.querySelector('.chapter-content');
+        if (!content) return;
+        
+        // Remove all font classes
+        fonts.forEach(f => content.classList.remove(`font-${f.id}`));
+        
+        // Add selected font class
+        content.classList.add(`font-${fontId}`);
+        
+        // Save to localStorage
+        localStorage.setItem('fontFamily', fontId);
+        
+        // Update UI
+        updateFontSelectorUI(fontId);
+    };
+    
+    const updateFontSelectorUI = (fontId) => {
+        const selectedFont = fonts.find(f => f.id === fontId);
+        const selectorBtn = document.querySelector('.font-selector-btn-text');
+        if (selectorBtn && selectedFont) {
+            selectorBtn.textContent = selectedFont.name;
+        }
+        
+        // Update active state in dropdown
+        document.querySelectorAll('.font-option').forEach(option => {
+            option.classList.toggle('active', option.dataset.font === fontId);
+        });
+    };
+    
+    // Font selector toggle
+    document.querySelector('.font-selector-btn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const selector = document.querySelector('.font-selector');
+        selector?.classList.toggle('active');
+    });
+    
+    // Close font selector when clicking outside
+    document.addEventListener('click', (e) => {
+        const selector = document.querySelector('.font-selector');
+        if (selector && !selector.contains(e.target)) {
+            selector.classList.remove('active');
+        }
+    });
+    
+    // Font option click handlers
+    document.querySelectorAll('.font-option').forEach(option => {
+        option.addEventListener('click', () => {
+            const fontId = option.dataset.font;
+            setFontFamily(fontId);
+            document.querySelector('.font-selector')?.classList.remove('active');
+        });
+    });
+    
+    initFontFamily();
         }
     });
     
