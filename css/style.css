@@ -1,7 +1,7 @@
 /* ========================================
    ПИШПЕКСКИЕ ХРОНИКИ
-   Минималистичный дизайн + кыргызский этнический стиль
-   Вдохновлено: современные арт-галереи, шырдак, тундук
+   Минималистичный дизайн в стиле музея современного искусства
+   Вдохновлено: MoMA, Tate Modern, Garage Museum
    ======================================== */
 
 /* ========================================
@@ -390,34 +390,20 @@ img {
 }
 
 /* ========================================
-   HERO SECTION — Gallery-style, full viewport
+   HERO SECTION — Museum exhibition style
    ======================================== */
 .hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: var(--space-xl) var(--space-md);
+    justify-content: flex-end;
+    padding: var(--space-2xl) var(--space-md) var(--space-xl);
     position: relative;
     overflow: hidden;
 }
 
-/* Subtle ethnic background pattern */
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 40%;
-    height: 100%;
-    background:
-        radial-gradient(circle at 30% 40%, rgba(181, 69, 42, 0.04) 0%, transparent 50%),
-        radial-gradient(circle at 70% 70%, rgba(196, 132, 29, 0.03) 0%, transparent 40%);
-    pointer-events: none;
-}
-
 .hero-content {
-    max-width: 800px;
+    max-width: 900px;
     position: relative;
     z-index: 1;
 }
@@ -428,23 +414,33 @@ img {
     letter-spacing: 0.4em;
     text-transform: uppercase;
     color: var(--color-accent);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
 }
 
 .hero-title {
-    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-size: clamp(4rem, 12vw, 9rem);
     font-weight: 400;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     margin-bottom: var(--space-md);
-    line-height: 0.92;
+    line-height: 0.88;
     color: var(--color-black);
+}
+
+/* Thin museum-style divider after title */
+.hero-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--color-accent);
+    margin-top: var(--space-md);
 }
 
 .hero-description {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1.375rem;
     color: var(--color-gray-500);
-    max-width: 460px;
+    max-width: 480px;
     margin-bottom: var(--space-lg);
     line-height: 1.7;
     font-style: italic;
@@ -457,12 +453,12 @@ img {
     font-size: 0.75rem;
     color: var(--color-gray-400);
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
 .hero-meta .separator {
-    color: var(--color-accent);
+    color: var(--color-gray-300);
     font-weight: 300;
 }
 
@@ -504,7 +500,7 @@ img {
     display: flex;
     align-items: baseline;
     gap: var(--space-md);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
     padding: 0 var(--space-md);
     max-width: 1200px;
     margin-left: auto;
@@ -526,15 +522,15 @@ img {
 }
 
 /* ========================================
-   NOVELS SECTION — Gallery grid
+   NOVELS SECTION — Museum exhibition grid
    ======================================== */
 .novels {
-    padding: var(--space-xl) 0;
+    padding: var(--space-2xl) 0;
     background: var(--color-cream);
     position: relative;
 }
 
-/* Ethnic top border on novels section */
+/* Thin line instead of ethnic border */
 .novels::before {
     content: '';
     display: block;
@@ -542,18 +538,8 @@ img {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: repeating-linear-gradient(
-        90deg,
-        var(--color-accent) 0px,
-        var(--color-accent) 8px,
-        transparent 8px,
-        transparent 12px,
-        var(--color-accent-warm) 12px,
-        var(--color-accent-warm) 20px,
-        transparent 20px,
-        transparent 24px
-    );
+    height: 1px;
+    background: var(--color-gray-300);
 }
 
 .novels-grid {
@@ -574,23 +560,22 @@ img {
 }
 
 .novel-card:hover {
-    background: var(--color-cream);
+    background: var(--color-white);
 }
 
 .novel-card-inner {
     padding: var(--space-lg) var(--space-md);
     display: flex;
     flex-direction: column;
-    min-height: 420px;
 }
 
 .novel-number {
     font-family: var(--font-serif);
-    font-size: 3rem;
+    font-size: 4.5rem;
     font-weight: 400;
     color: var(--color-gray-200);
     line-height: 1;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
     transition: color var(--transition);
 }
 
@@ -662,75 +647,47 @@ img {
 }
 
 /* ========================================
-   QUOTE SECTION — Full-bleed ethnic accent
+   QUOTE SECTION — Museum projection hall
    ======================================== */
 .quote-section {
     padding: var(--space-2xl) var(--space-md);
+    min-height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background: var(--color-black);
     color: var(--color-white);
     position: relative;
-    overflow: hidden;
-}
-
-/* Decorative tunduk pattern in background */
-.quote-section::before {
-    content: '';
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border: 1px solid rgba(181, 69, 42, 0.15);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-.quote-section::after {
-    content: '';
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    border: 1px solid rgba(196, 132, 29, 0.12);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
 }
 
 .quote {
-    max-width: 700px;
+    max-width: 800px;
     text-align: center;
     position: relative;
-    z-index: 1;
 }
 
 .quote p {
     font-family: var(--font-serif);
-    font-size: clamp(1.375rem, 3.5vw, 2.25rem);
+    font-size: clamp(1.75rem, 4.5vw, 3rem);
     font-style: italic;
-    line-height: 1.5;
-    margin-bottom: var(--space-md);
+    line-height: 1.4;
+    margin-bottom: var(--space-lg);
 }
 
 .quote cite {
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-style: normal;
-    color: var(--color-gray-400);
-    letter-spacing: 0.1em;
+    color: var(--color-gray-500);
+    letter-spacing: 0.15em;
     text-transform: uppercase;
 }
 
 /* ========================================
-   ABOUT SECTION
+   ABOUT SECTION — Museum wall text
    ======================================== */
 .about {
-    padding: var(--space-xl) 0;
+    padding: var(--space-2xl) 0;
 }
 
 .about-content {
@@ -784,14 +741,15 @@ img {
 }
 
 /* ========================================
-   TIMELINE — Clean horizontal style
+   TIMELINE — Museum timeline wall
    ======================================== */
 .timeline {
-    padding: var(--space-xl) 0;
+    padding: var(--space-2xl) 0;
     background: var(--color-cream);
     position: relative;
 }
 
+/* Thin line instead of ethnic border */
 .timeline::before {
     content: '';
     display: block;
@@ -799,18 +757,8 @@ img {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: repeating-linear-gradient(
-        90deg,
-        var(--color-accent) 0px,
-        var(--color-accent) 8px,
-        transparent 8px,
-        transparent 12px,
-        var(--color-accent-warm) 12px,
-        var(--color-accent-warm) 20px,
-        transparent 20px,
-        transparent 24px
-    );
+    height: 1px;
+    background: var(--color-gray-300);
 }
 
 .timeline-items {
@@ -821,9 +769,9 @@ img {
 
 .timeline-item {
     display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: var(--space-md);
-    padding: var(--space-md) 0;
+    grid-template-columns: 120px 1fr;
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
     border-bottom: 1px solid var(--color-gray-300);
 }
 
@@ -833,8 +781,9 @@ img {
 
 .timeline-year {
     font-family: var(--font-serif);
-    font-size: 1.375rem;
+    font-size: 1.75rem;
     color: var(--color-accent);
+    line-height: 1;
 }
 
 .timeline-content h4 {
@@ -843,6 +792,7 @@ img {
     font-weight: 600;
     margin-bottom: var(--space-xs);
     color: var(--color-black);
+    letter-spacing: 0.02em;
 }
 
 .timeline-content p {
@@ -852,7 +802,7 @@ img {
 }
 
 /* ========================================
-   FOOTER — Minimal with ethnic accent
+   FOOTER — Minimal museum style
    ======================================== */
 .footer {
     background: var(--color-black);
@@ -861,6 +811,7 @@ img {
     position: relative;
 }
 
+/* Thin line instead of ethnic border */
 .footer::before {
     content: '';
     display: block;
@@ -868,18 +819,8 @@ img {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: repeating-linear-gradient(
-        90deg,
-        var(--color-accent) 0px,
-        var(--color-accent) 8px,
-        transparent 8px,
-        transparent 12px,
-        var(--color-accent-warm) 12px,
-        var(--color-accent-warm) 20px,
-        transparent 20px,
-        transparent 24px
-    );
+    height: 1px;
+    background: var(--color-gray-600);
 }
 
 .footer-content {
@@ -1619,7 +1560,7 @@ img {
     :root {
         --space-lg: 3rem;
         --space-xl: 4rem;
-        --space-2xl: 6rem;
+        --space-2xl: 5rem;
     }
 
     /* Navigation */
@@ -1635,23 +1576,31 @@ img {
         display: flex;
     }
 
-    /* Hero */
+    /* Hero — museum poster on mobile: full screen, bottom-aligned */
     .hero {
-        padding: var(--space-xl) var(--space-sm);
-        min-height: auto;
-        padding-top: calc(var(--space-xl) + 60px);
-    }
-
-    .hero::before {
-        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: var(--space-lg) var(--space-sm) var(--space-lg);
+        justify-content: flex-end;
     }
 
     .hero-title {
-        font-size: clamp(2.5rem, 12vw, 4rem);
+        font-size: clamp(3rem, 14vw, 4.5rem);
+        line-height: 0.9;
+    }
+
+    .hero-title::after {
+        width: 40px;
+        margin-top: var(--space-sm);
+    }
+
+    .hero-subtitle {
+        margin-bottom: var(--space-sm);
     }
 
     .hero-description {
         font-size: 1.0625rem;
+        margin-bottom: var(--space-md);
     }
 
     .hero-meta {
@@ -1663,14 +1612,23 @@ img {
         display: none;
     }
 
-    /* Sections */
+    /* Sections — more breathing room */
     .section-header {
         flex-direction: column;
         gap: var(--space-xs);
         padding: 0 var(--space-sm);
+        margin-bottom: var(--space-lg);
     }
 
-    /* Novels Grid */
+    .section-title {
+        font-size: clamp(1.75rem, 8vw, 2.5rem);
+    }
+
+    /* Novels Grid — single column, museum label cards */
+    .novels {
+        padding: var(--space-xl) 0;
+    }
+
     .novels-grid {
         grid-template-columns: 1fr;
         padding: 0 var(--space-sm);
@@ -1678,35 +1636,34 @@ img {
     }
 
     .novel-card-inner {
-        padding: var(--space-md);
-        min-height: auto;
+        padding: var(--space-md) var(--space-sm);
     }
 
     .novel-number {
-        font-size: 2.5rem;
-        margin-bottom: var(--space-sm);
+        font-size: 3.5rem;
+        margin-bottom: var(--space-xs);
     }
 
     .novel-title {
         font-size: 1.375rem;
     }
 
-    /* Quote */
+    /* Quote — still immersive on mobile */
     .quote-section {
         padding: var(--space-xl) var(--space-sm);
+        min-height: 60vh;
+        min-height: 60dvh;
     }
 
-    .quote-section::before {
-        width: 200px;
-        height: 200px;
-    }
-
-    .quote-section::after {
-        width: 120px;
-        height: 120px;
+    .quote p {
+        font-size: clamp(1.375rem, 5vw, 1.75rem);
     }
 
     /* About */
+    .about {
+        padding: var(--space-xl) 0;
+    }
+
     .about-content {
         grid-template-columns: 1fr;
         gap: var(--space-lg);
@@ -1727,18 +1684,23 @@ img {
         padding-bottom: var(--space-sm);
     }
 
-    /* Timeline */
+    /* Timeline — stacked on mobile, still museum feel */
+    .timeline {
+        padding: var(--space-xl) 0;
+    }
+
     .timeline-items {
         padding: 0 var(--space-sm);
     }
 
     .timeline-item {
-        grid-template-columns: 70px 1fr;
-        gap: var(--space-sm);
+        grid-template-columns: 80px 1fr;
+        gap: var(--space-md);
+        padding: var(--space-md) 0;
     }
 
     .timeline-year {
-        font-size: 1.125rem;
+        font-size: 1.25rem;
     }
 
     /* Footer */
@@ -1853,17 +1815,23 @@ img {
         font-size: 15px;
     }
 
+    /* Hero — dramatic even on small screens */
     .hero {
-        padding: var(--space-lg) var(--space-sm);
-        padding-top: calc(var(--space-lg) + 60px);
+        padding: var(--space-md) var(--space-sm) var(--space-md);
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: clamp(2.5rem, 16vw, 3.5rem);
         margin-bottom: var(--space-sm);
     }
 
+    .hero-title::after {
+        width: 32px;
+    }
+
     .hero-subtitle {
+        font-size: 0.625rem;
+        letter-spacing: 0.3em;
         margin-bottom: var(--space-sm);
     }
 
@@ -1891,13 +1859,13 @@ img {
         font-size: 1.75rem;
     }
 
-    /* Novel cards */
+    /* Novel cards — compact museum labels */
     .novel-card-inner {
         padding: var(--space-sm);
     }
 
     .novel-number {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     .novel-title {
@@ -1916,19 +1884,35 @@ img {
         font-size: 0.625rem;
     }
 
+    /* Quote */
+    .quote-section {
+        min-height: 50vh;
+        min-height: 50dvh;
+    }
+
+    .quote p {
+        font-size: 1.25rem;
+        line-height: 1.5;
+    }
+
     /* About */
     .about-details {
         grid-template-columns: 1fr;
     }
 
-    /* Timeline */
+    .detail-value {
+        font-size: 1.125rem;
+    }
+
+    /* Timeline — stacked, museum wall style */
     .timeline-item {
         grid-template-columns: 1fr;
         gap: var(--space-xs);
+        padding: var(--space-md) 0;
     }
 
     .timeline-year {
-        font-size: 1rem;
+        font-size: 1.375rem;
     }
 
     .timeline-content h4 {
@@ -1992,11 +1976,23 @@ img {
     }
 
     .hero-title {
-        font-size: 2rem;
+        font-size: 2.25rem;
+    }
+
+    .hero-title::after {
+        width: 24px;
     }
 
     .novel-card-inner {
         padding: var(--space-sm) 0.75rem;
+    }
+
+    .novel-number {
+        font-size: 2rem;
+    }
+
+    .quote p {
+        font-size: 1.125rem;
     }
 }
 
@@ -2057,14 +2053,28 @@ img {
         min-height: auto;
         padding: var(--space-md) var(--space-sm);
         padding-top: calc(var(--space-md) + 60px);
+        justify-content: center;
     }
 
     .hero-title {
-        font-size: 2rem;
+        font-size: clamp(2rem, 6vw, 3rem);
+    }
+
+    .hero-title::after {
+        width: 40px;
+        margin-top: var(--space-sm);
+    }
+
+    .hero-description {
+        margin-bottom: var(--space-md);
     }
 
     .novels-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quote-section {
+        min-height: 80vh;
     }
 }
 
