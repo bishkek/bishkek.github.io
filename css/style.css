@@ -330,16 +330,20 @@ img {
 }
 
 .nav-mobile {
-    display: none;
+    display: flex;
     flex-direction: column;
-    padding: var(--space-sm) 0;
+    padding: 0;
     border-top: 1px solid var(--color-gray-200);
     margin-top: var(--space-sm);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
 }
 
 .nav-mobile a {
     padding: var(--space-sm);
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     font-weight: 500;
     color: var(--color-gray-600);
     transition: color var(--transition), background var(--transition);
@@ -351,7 +355,9 @@ img {
 }
 
 .nav-mobile.active {
-    display: flex;
+    max-height: 300px;
+    opacity: 1;
+    padding: var(--space-sm) 0;
 }
 
 /* Theme Toggle */
@@ -365,8 +371,8 @@ img {
 }
 
 .theme-toggle button {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: none;
     background: transparent;
@@ -387,6 +393,7 @@ img {
 .theme-toggle svg {
     width: 16px;
     height: 16px;
+    pointer-events: none;
 }
 
 /* ========================================
@@ -1117,7 +1124,7 @@ img {
     top: 60px;
     padding: var(--space-xs) var(--space-sm);
     text-align: center;
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     color: var(--color-gray-400);
     background: var(--reading-bg);
     border-bottom: 1px solid var(--color-gray-200);
@@ -1212,9 +1219,11 @@ img {
     display: none;
     text-align: center;
     padding: var(--space-sm);
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     color: var(--color-gray-400);
     letter-spacing: 0.05em;
+    opacity: 0;
+    animation: swipeHintFade 4s ease-in-out forwards;
 }
 
 /* ========================================
@@ -1764,14 +1773,20 @@ img {
         display: block;
     }
 
-    /* Reader controls */
+    /* Reader controls — bottom-center on mobile for easier reach */
     .reader-controls {
         bottom: var(--space-md);
         right: var(--space-sm);
+        left: var(--space-sm);
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: flex-end;
+        gap: 0.5rem;
     }
 
     .font-selector-btn {
         min-width: 140px;
+        min-height: 44px;
         padding: 0.5rem 0.75rem;
         font-size: 0.75rem;
     }
@@ -1819,7 +1834,7 @@ img {
     }
 
     .hero-subtitle {
-        font-size: 0.625rem;
+        font-size: 0.6875rem;
         letter-spacing: 0.3em;
         margin-bottom: var(--space-sm);
     }
@@ -1830,7 +1845,7 @@ img {
     }
 
     .hero-meta {
-        font-size: 0.6875rem;
+        font-size: 0.75rem;
     }
 
     .hero-meta .separator {
@@ -1870,7 +1885,7 @@ img {
     }
 
     .novel-meta {
-        font-size: 0.625rem;
+        font-size: 0.6875rem;
     }
 
     /* Quote */
@@ -1909,7 +1924,7 @@ img {
     }
 
     .timeline-content p {
-        font-size: 0.8125rem;
+        font-size: 0.875rem;
     }
 
     /* Reader */
@@ -2032,6 +2047,41 @@ img {
         display: flex;
         align-items: center;
     }
+
+    /* Touch feedback — active states instead of hover */
+    .theme-toggle button:active {
+        background: var(--color-gray-200);
+        transform: scale(0.92);
+    }
+
+    .font-decrease:active,
+    .font-increase:active {
+        background: var(--color-gray-200);
+        transform: scale(0.92);
+    }
+
+    .chapter-nav-link:active {
+        background: var(--color-gray-100);
+    }
+
+    .font-selector-btn:active {
+        border-color: var(--color-accent);
+        background: var(--color-gray-50);
+    }
+
+    .scroll-to-top:active {
+        transform: scale(0.92);
+        border-color: var(--color-accent);
+    }
+
+    .reader-control-btn:active {
+        background: var(--color-gray-200);
+        transform: scale(0.92);
+    }
+
+    .font-option:active {
+        background: var(--color-cream);
+    }
 }
 
 /* ========================================
@@ -2084,6 +2134,10 @@ img {
         padding-left: max(var(--space-sm), env(safe-area-inset-left));
         padding-right: max(var(--space-sm), env(safe-area-inset-right));
     }
+
+    .reader-controls {
+        bottom: max(var(--space-md), calc(env(safe-area-inset-bottom) + 0.5rem));
+    }
 }
 
 /* ========================================
@@ -2110,6 +2164,13 @@ img {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@keyframes swipeHintFade {
+    0% { opacity: 0; }
+    15% { opacity: 1; }
+    75% { opacity: 1; }
+    100% { opacity: 0; display: none; }
 }
 
 /* ========================================

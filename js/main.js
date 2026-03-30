@@ -139,6 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
             selector.classList.remove('active');
         }
     });
+
+    // Close font selector with ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.querySelector('.font-selector')?.classList.remove('active');
+        }
+    });
     
     // Font option click handlers
     document.querySelectorAll('.font-option').forEach(option => {
@@ -176,6 +183,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!e.target.closest('.nav')) {
                 navToggle.setAttribute('aria-expanded', 'false');
                 navMobile.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMobile.classList.contains('active')) {
+                navToggle.setAttribute('aria-expanded', 'false');
+                navMobile.classList.remove('active');
+                navToggle.focus();
             }
         });
     }
